@@ -73,7 +73,7 @@ class CRUDBase:
         return db_obj
 
     async def get_open_project(
-            self, 
+            self,
             session: AsyncSession
     ):
         project = await session.execute(select(CharityProject).where(

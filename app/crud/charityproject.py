@@ -57,14 +57,13 @@ class CRUDCharityProject(CRUDBase):
             projects.scalars().all(),
             key=lambda obj: obj.close_date - obj.create_date
         )
-    
+
     async def get_projects_by_completion_rate(
             self,
             session: AsyncSession,
     ) -> List[CharityProject]:
         query = select(CharityProject).where(
-            CharityProject.fully_invested
-            ).order_by(
+            CharityProject.fully_invested).order_by(
                 CharityProject.close_date - CharityProject.create_date
         )
         return await session.execute(query).scalars().all()
