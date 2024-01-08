@@ -72,17 +72,19 @@ class CRUDBase:
         await session.commit()
         return db_obj
 
-    async def get_open_object(
-            self,
+    async def get_open_project(
+            self, 
             session: AsyncSession
     ):
         project = await session.execute(select(CharityProject).where(
             CharityProject.fully_invested == 0
         ).order_by('create_date'))
         project = project.scalars().first()
+        return project
 
+    async def get_open_donation(self, session: AsyncSession):
         donation = await session.execute(select(Donation).where(
             Donation.fully_invested == 0
         ).order_by('create_date'))
         donation = donation.scalars().first()
-        return project, donation
+        return donation

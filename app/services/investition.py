@@ -28,10 +28,8 @@ def determine_invested_model(
         obj: Union[CharityProject, Donation]
 ) -> type:
     if isinstance(obj, Donation):
-        invested_model = CharityProject
-        return invested_model
-    invested_model = Donation
-    return invested_model
+        return CharityProject
+    return Donation
 
 
 async def non_invested_objects(
